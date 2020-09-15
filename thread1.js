@@ -6,19 +6,16 @@ if(isMainThread) {
     worker.on('message', (msg) => {
         console.log(`Worker: ${msg}`);
       });
-
     console.log("doing some random work in main thread..!!");
-
-
 }else{
     parentPort.postMessage('hello from worker thread');
-    meDoingTimepass(1000);
+    cpuIntensiveTask(1000);
     parentPort.postMessage('i am working');
-    meDoingTimepass(1000);
+    cpuIntensiveTask(1000);
     parentPort.postMessage('task is done..!!');
 }
 
-function meDoingTimepass(timeInSecond) {
+function cpuIntensiveTask(timeInSecond) {
     const end = Date.now() + timeInSecond;
     while (Date.now() < end) { }
-  }
+}
